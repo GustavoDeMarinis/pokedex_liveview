@@ -1,16 +1,16 @@
 defmodule PokedexLiveview do
-  def get_pokedex do
-    res = HTTPoison.get(pokedex_url("pokemon/"))
+  def get_pokedex(url) do
+    res = HTTPoison.get(url)
     {:ok, %HTTPoison.Response{body: body}} = res
 
-    %{"results" => results} = Poison.decode!(body)
+    %{"results" => results, "next" => next_url, "previous" => previous_url} = Poison.decode!(body)
 
-    pokemonList =
+    pokemon_list =
       Enum.map(results, fn %{"url" => url} = _result ->
         get_pokemon_preview(url)
       end)
 
-    pokemonList
+    %{pokemon_list: pokemon_list, next_url: next_url, previous_url: previous_url}
   end
 
   def get_pokemon_preview(url) do
@@ -26,7 +26,7 @@ defmodule PokedexLiveview do
       "types" => types
     } = pokemon
 
-    IO.inspect({name, id, img, types})
+    %{name: name, id: id, img: img, types: types}
   end
 
   def pokedex_url(endpoint) do
