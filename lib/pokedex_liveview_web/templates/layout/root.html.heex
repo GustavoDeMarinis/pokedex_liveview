@@ -9,17 +9,7 @@
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
-  <body>
-    <header>
-      <section class="container">
-        <nav>
-         Aca va la busquedax
-        </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          Aca imagen de pokedex
-        </a>
-      </section>
-    </header>
-    <%= @inner_content %>
+  <body class="bg-violet-500">  
+    <%= @inner_content %>  
   </body>
 </html>

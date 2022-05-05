@@ -1,21 +1,48 @@
 defmodule PokedexLiveviewWeb.PokedexMain do
   use Phoenix.LiveView
+  alias PokedexLiveviewWeb.Router.Helpers, as: Routes
   import PokedexLiveview, only: [get_pokedex: 1, pokedex_url: 1]
 
   def mount(_params, _session, socket) do
-    response = get_pokedex(pokedex_url("pokemon/"))
-    socket = assign(socket, response)
+    socket = assign(socket, :loading, true)
 
     {:ok, socket}
   end
 
-  def render(%{pokemon_list: pokemon_list} = assigns) do
+  def handle_params(_params, _session, socket) do
+    response = get_pokedex(pokedex_url("pokemon/?offset=0&limit=12"))
+    IO.inspect("handle_params")
+
+    socket = assign(socket, response)
+    {:noreply, socket}
+  end
+
+  def handle_info(:load_end, socket) do
+    IO.inspect("handle_info")
+    {:noreply, assign(socket, :loading, false)}
+  end
+
+  def render(assigns) do
+    send(self(), :load_end)
+    IO.inspect("render")
+
     ~H"""
-    <%= for %{id: id, img: img, name: name, types: types} = _pokemon <- pokemon_list do %>
-      <%= live_component  PokedexCard, id: id,  name: name, img: img, types: types  %>
-    <%end %>
-    <button phx-click="previous">Prev</button>
-    <button phx-click="next">Next</button>
+    <div>
+
+      <.live_component module={PokedexSearchBar} id={"pokemon-search"}/>
+      <%= if @loading == true do %>
+        loading.....
+      <%else %>
+      <div class="flex flex-wrap bg-white items-center justify-center">
+
+        <%= for %{id: id, img: img, name: name, types: types} = _pokemon <- @pokemon_list do %>
+          <.live_component module={PokedexCard} id={id}  name={name} img={img} types={types}  />
+        <%end %>
+      </div>
+      <button phx-click="previous">Prev</button>
+      <button phx-click="next">Next</button>
+      <%end%>
+    </div>
     """
   end
 
@@ -53,5 +80,12 @@ defmodule PokedexLiveviewWeb.PokedexMain do
 
         {:noreply, socket}
     end
+  end
+
+  def handle_event("save", %{"pokemon" => %{"pokemon" => pokemon}}, socket) do
+    {:noreply,
+     push_redirect(socket,
+       to: Routes.live_path(socket, PokedexLiveviewWeb.PokemonDetail, id: pokemon)
+     )}
   end
 end

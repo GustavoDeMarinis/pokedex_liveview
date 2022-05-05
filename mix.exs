@@ -47,7 +47,8 @@ defmodule PokedexLiveview.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.8"},
-      {:poison, "~> 5.0"}
+      {:poison, "~> 5.0"},
+      {:tailwind, "~> 0.1.5"}
     ]
   end
 
@@ -60,7 +61,7 @@ defmodule PokedexLiveview.MixProject do
   defp aliases do
     [
       setup: ["deps.get"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end
 end
