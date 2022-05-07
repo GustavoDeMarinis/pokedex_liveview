@@ -8,15 +8,27 @@ module.exports = {
         100: "#f5f5f4",
         200: "#e7e5e4",
         300: "#d6d3d1",
-        400: "#a8a29e",
+        400: "#919191",
         500: "#78716c",
         600: "#57534e",
         700: "#44403c",
-        800: "#292524",
+        800: "#313131",
         900: "#1c1917",
       },
+      white: "#fff",
+      babyblue: "#30a7d7",
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: "Flexo Light",
+      },
+      backgroundImage: {
+        "main-bg":
+          "url('https://assets.pokemon.com/static2/_ui/img/chrome/body_bg.png')",
+        "container-bg":
+          "url('https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png')",
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };

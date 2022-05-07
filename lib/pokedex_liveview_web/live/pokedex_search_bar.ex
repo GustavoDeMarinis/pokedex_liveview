@@ -3,7 +3,7 @@ defmodule PokedexSearchBar do
 
   def render(assigns) do
     ~H"""
-      <div>
+      <div class="flex">
       <nav>
       <.form
         let={f}

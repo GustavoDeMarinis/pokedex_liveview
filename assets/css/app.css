@@ -1,6 +1,24 @@
+@import url(//db.onlinewebfonts.com/c/073a3b73a63a87e100f6bb8f003fc0d3?family=Flexo+Light);
+
+
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+/* 
+@font-face {
+  font-family: 'Flexo';
+  src: local('Flexo Demi'), local('Flexo-Demi'),
+      url('../fonts/Flexo-Demi.woff2') format('woff2'),
+      url('../fonts/Flexo-Demi.woff') format('woff'),
+      url('../fonts/Flexo-Demi.tff') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body, p, h1, h2, h3{
+ font-family: Flexo;
+} */
 
 /* This file is for your main application CSS */
 
@@ -106,6 +124,8 @@
   0% { scale: 0.95; opacity: 0; }
   100% { scale: 1.0; opacity: 1; }
 }
+
+
 
 @keyframes fade-out-scale-keys{
   0% { scale: 1.0; opacity: 1; }
