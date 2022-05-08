@@ -18,7 +18,6 @@ defmodule PokedexLiveviewWeb.Router do
     pipe_through :browser
 
     live "/", PokedexMain
-    live "/pokemon", PokemonDetail
   end
 
   # Other scopes may use custom stacks.
