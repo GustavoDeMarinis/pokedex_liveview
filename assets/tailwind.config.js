@@ -22,12 +22,6 @@ module.exports = {
       fontFamily: {
         sans: "Flexo Light",
       },
-      backgroundImage: {
-        "main-bg":
-          "url('https://assets.pokemon.com/static2/_ui/img/chrome/body_bg.png')",
-        "container-bg":
-          "url('https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png')",
-      },
     },
   },
   plugins: [require("@tailwindcss/forms")],

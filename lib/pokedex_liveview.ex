@@ -13,7 +13,8 @@ defmodule PokedexLiveview do
       pokemon_list: pokemon_list,
       next_url: next_url,
       previous_url: previous_url,
-      # pokemon_detail_url: url,
+      prev_pokemon: nil,
+      next_pokemon: nil,
       pokemon_detail: nil
     }
   end
@@ -75,6 +76,22 @@ defmodule PokedexLiveview do
       "fighting" -> "background-color: #d56723"
       "ice" -> "background-color: #51c4e7"
       _ -> ""
+    end
+  end
+
+  def get_next_pokemon(id) do
+    if id >= 898 do
+      %{id: 1, name: "bulbasaur"}
+    else
+      get_pokemon_detail(pokedex_url("pokemon/" <> Integer.to_string(id + 1)))
+    end
+  end
+
+  def get_prev_pokemon(id) do
+    if id <= 1 do
+      %{id: 898, name: "Calyrex"}
+    else
+      get_pokemon_detail(pokedex_url("pokemon/" <> Integer.to_string(id - 1)))
     end
   end
 
